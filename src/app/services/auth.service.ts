@@ -64,7 +64,6 @@ export class AuthService {
     }).pipe(
       tap(response => {
         if (response.success) {
-          // Navigate to login without saving token or roles
           this.router.navigate(['/login']);
         }
       })

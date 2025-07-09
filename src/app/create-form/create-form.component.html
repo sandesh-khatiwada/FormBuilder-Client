@@ -4,7 +4,7 @@
     <h2>Create Form Template</h2>
 
     <form (ngSubmit)="onSubmit()">
-      <!-- Form Name -->
+
       <div class="form-group">
         <label for="formName">Form Name</label>
         <input
@@ -17,7 +17,7 @@
         />
       </div>
 
-      <!-- Allow Edit Checkbox -->
+
       <div class="form-group form-check">
         <input
           type="checkbox"
@@ -31,7 +31,7 @@
         </label>
       </div>
 
-      <!-- Dynamic Fields -->
+
       <div *ngFor="let field of jsonSchema; let i = index" class="field-group">
         <h5>Field {{ i + 1 }}</h5>
         <div class="form-row">
@@ -79,7 +79,7 @@
           <button type="button" class="btn btn-danger" (click)="removeField(i)">Remove</button>
         </div>
 
-        <!-- Dropdown Options -->
+
         <div *ngIf="field.type === 'dropdown'" class="form-group">
           <label>Dropdown Options (comma separated)</label>
           <input

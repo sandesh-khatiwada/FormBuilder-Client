@@ -94,12 +94,12 @@ exportToExcel(): void {
 
   this.http.get(url, {
     headers,
-    responseType: 'blob'  // 👈 important to get binary Excel data
+    responseType: 'blob' 
   }).subscribe({
     next: (blob) => {
       const fileName = `form-data-${this.templateId}.xlsx`;
 
-      // Create a temporary anchor to trigger download
+      //temporary anchor to trigger download
       const a = document.createElement('a');
       const objectUrl = URL.createObjectURL(blob);
       a.href = objectUrl;

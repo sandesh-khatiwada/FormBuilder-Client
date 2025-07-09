@@ -21,10 +21,10 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.errorMessages = []; // Clear previous errors
+    this.errorMessages = []; 
     this.authService.register(this.email, this.password, this.username).subscribe({
       next: () => {
-        // Navigation to login is handled by AuthService
+        // Navigation is handled by AuthService itself
       },
       error: (err) => {
         console.error('Registration failed', err);

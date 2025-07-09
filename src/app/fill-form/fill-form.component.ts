@@ -53,9 +53,9 @@ export class FillFormComponent implements OnInit {
     });
   }
 
-  
+
  onSubmit(): void {
-  this.isSubmitting = true; // start submitting state
+  this.isSubmitting = true; 
 
   const jsonData = this.jsonSchema.map(field => {
     let value = this.formData[field.key];
@@ -85,7 +85,7 @@ export class FillFormComponent implements OnInit {
     error: (err) => {
       this.isSubmitting = false;
 
-      // Your error handling code here (cleaned error messages)
+
       if (err.error && err.error.status === 'BAD_REQUEST' && Array.isArray(err.error.errors)) {
         const prefix = 'Error parsing form data: Error processing form data: ';
         const cleanedErrors = err.error.errors.map((errorMsg: string) => {

@@ -28,5 +28,5 @@ export const routes: Routes = [
   { path: 'view-data/:templateId', component: ViewDataComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: 'fill-form/:templateId', component: FillFormComponent, canActivate: [AuthGuard], data: { roles: ['ADMIN'] } },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '**', redirectTo: '/login' }  // ✅ LAST route
+  { path: '**', redirectTo: '/login' }  
 ];

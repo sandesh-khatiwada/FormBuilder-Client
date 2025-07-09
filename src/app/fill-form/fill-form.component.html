@@ -8,7 +8,7 @@
       <div *ngFor="let field of jsonSchema" class="form-group">
         <label>{{ field.label }}</label>
 
-        <!-- Text Input -->
+
         <input
           *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'number'"
           [type]="field.type"
@@ -18,7 +18,7 @@
           [required]="field.required"
         />
 
-        <!-- Textarea -->
+
         <textarea
           *ngIf="field.type === 'textarea'"
           [(ngModel)]="formData[field.key]"
@@ -27,7 +27,6 @@
           [required]="field.required"
         ></textarea>
 
-        <!-- Checkbox -->
         <input
           *ngIf="field.type === 'checkbox'"
           type="checkbox"
@@ -35,7 +34,7 @@
           [name]="field.key"
         />
 
-        <!-- Date/Time/Datetime -->
+
         <input
           *ngIf="field.type === 'date' || field.type === 'time' || field.type === 'datetime'"
           [type]="field.type === 'datetime' ? 'datetime-local' : field.type"
@@ -44,7 +43,7 @@
           class="form-control"
         />
 
-        <!-- Dropdown -->
+
     <select
         *ngIf="field.type === 'dropdown'"
         [(ngModel)]="formData[field.key]"
@@ -61,7 +60,7 @@
 
       
 
-      <!-- Mail me a copy -->
+
       <div class="form-group">
         <label>
           <input type="checkbox" [(ngModel)]="provideResponse" name="provideResponse" />

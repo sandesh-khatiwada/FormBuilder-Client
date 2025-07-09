@@ -20,10 +20,10 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.errorMessages = []; // Clear previous errors
+    this.errorMessages = []; 
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
-        // Navigation is handled by AuthService
+        // Navigation is handled by AuthService itself
       },
       error: (err) => {
         console.error('Login failed', err);

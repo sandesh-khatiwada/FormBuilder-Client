@@ -37,7 +37,7 @@ export class CreateFormComponent {
       type: 'text',
       key: '',
       required: false,
-      optionsInput: '' // for dropdown only
+      optionsInput: '' // for dropdown
     });
   }
 
