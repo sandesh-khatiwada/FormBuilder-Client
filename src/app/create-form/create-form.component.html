@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="card">
+          <button class="btn btn-outline" (click)="goBack()">← Go Back</button>
+    <h2>Create Form Template</h2>
+
+    <form (ngSubmit)="onSubmit()">
+      <!-- Form Name -->
+      <div class="form-group">
+        <label for="formName">Form Name</label>
+        <input
+          type="text"
+          id="formName"
+          [(ngModel)]="formName"
+          name="formName"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <!-- Allow Edit Checkbox -->
+      <div class="form-group form-check">
+        <input
+          type="checkbox"
+          id="allowEdit"
+          [(ngModel)]="allowEdit"
+          name="allowEdit"
+          class="form-check-input"
+        />
+        <label for="allowEdit" class="form-check-label">
+          Make this form editable
+        </label>
+      </div>
+
+      <!-- Dynamic Fields -->
+      <div *ngFor="let field of jsonSchema; let i = index" class="field-group">
+        <h5>Field {{ i + 1 }}</h5>
+        <div class="form-row">
+          <input
+            type="text"
+            placeholder="Label"
+            [(ngModel)]="field.label"
+            name="label-{{i}}"
+            class="form-control"
+            required
+          />
+          <select
+            [(ngModel)]="field.type"
+            name="type-{{i}}"
+            class="form-control"
+            required
+          >
+            <option value="text">Text</option>
+            <option value="textarea">Textarea</option>
+            <option value="number">Number</option>
+            <option value="email">Email</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="date">Date</option>
+            <option value="time">Time</option>
+            <option value="datetime">Datetime</option>
+            <option value="dropdown">Dropdown</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Key"
+            [(ngModel)]="field.key"
+            name="key-{{i}}"
+            class="form-control"
+            required
+          />
+          <label class="form-check-label">
+            <input
+              type="checkbox"
+              [(ngModel)]="field.required"
+              name="required-{{i}}"
+              class="form-check-input"
+            />
+            Required
+          </label>
+          <button type="button" class="btn btn-danger" (click)="removeField(i)">Remove</button>
+        </div>
+
+        <!-- Dropdown Options -->
+        <div *ngIf="field.type === 'dropdown'" class="form-group">
+          <label>Dropdown Options (comma separated)</label>
+          <input
+            type="text"
+            [(ngModel)]="field.optionsInput"
+            name="options-{{i}}"
+            class="form-control"
+            placeholder="e.g., Option A, Option B, Option C"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary" (click)="addField()">+ Add Field</button>
+
+      <br /><br />
+
+      <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Creating...' : 'Create Form' }}
+      </button>
+    </form>
+  </div>
+</div>
