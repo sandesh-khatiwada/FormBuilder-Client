@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.css']
 })
+
 export class CreateFormComponent {
   formName = '';
   allowEdit = false;

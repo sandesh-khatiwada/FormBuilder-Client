@@ -1,12 +1,44 @@
-
 <div class="container">
-  <div class="header">
-    <h2>User Dashboard</h2>
-    <button (click)="logout()" class="btn btn-danger">Logout</button>
-  </div>
   <div class="card">
-    <h3>Welcome, User!</h3>
-    <p>This is the user dashboard.</p>
+    <div class="header">
+      <h2>Welcome, User</h2>
+      <button (click)="logout()" class="btn btn-danger">Logout</button>
+    </div>
+
+    <div class="form-group" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="searchTemplates()"
+        placeholder="Search by Name..."
+        class="form-control"
+        style="flex: 1;"
+      />
+      <button class="btn btn-outline" (click)="searchTemplates()">Search</button>
+    </div>
+
+    <div *ngIf="formTemplates.length === 0" class="text-center">
+      <p>No Form Templates</p>
+    </div>
+
+    <div *ngFor="let template of formTemplates" class="form-template-card">
+      <div class="template-header">
+        <h4>{{ template.name }}</h4>
+        <div>
+          <button class="btn btn-sm btn-outline" (click)="viewMyData(template.templateId)">View My Submission</button>
+          <button class="btn btn-sm btn-outline" (click)="addNewData(template.templateId)">Add New Data</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination" *ngIf="formTemplates.length > 0">
+      <button class="btn btn-outline" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+      <span style="align-self: center;">Page {{ currentPage }}</span>
+      <button class="btn btn-outline" (click)="nextPage()" [disabled]="!hasNextPage">Next</button>
+    </div>
+
+    <div class="text-center" *ngIf="!hasNextPage && formTemplates.length > 0">
+      <p style="color: gray; font-style: italic;">End of Templates</p>
+    </div>
   </div>
 </div>
- 
