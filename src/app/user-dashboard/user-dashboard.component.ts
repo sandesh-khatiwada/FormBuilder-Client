@@ -12,6 +12,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
+
 export class UserDashboardComponent implements OnInit {
   formTemplates: any[] = [];
   apiUrl = 'http://localhost:8090/api';
@@ -19,6 +20,7 @@ export class UserDashboardComponent implements OnInit {
   currentPage: number = 1;
   limit: number = 5;
   hasNextPage: boolean = true;
+  username:string|null = null;
 
   constructor(
     private authService: AuthService,
@@ -27,6 +29,12 @@ export class UserDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+      const storedUsername = localStorage.getItem("username");
+      this.username = storedUsername 
+      ? storedUsername.charAt(0).toUpperCase() + storedUsername.slice(1) 
+      : null;
+
+
     this.loadFormTemplates();
   }
 

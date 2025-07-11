@@ -19,6 +19,7 @@ export class UserViewDataComponent implements OnInit {
   limit: number = 10;
   hasNextPage: boolean = true;
   allowEdit: boolean = false;
+  allowDelete: boolean = false; 
 
   constructor(
     private route: ActivatedRoute,
@@ -44,12 +45,13 @@ export class UserViewDataComponent implements OnInit {
       next: (res) => {
         if (res.success && res.data) {
           this.allowEdit = res.data.allowEdit;
+          this.allowDelete = res.data.allowDelete; 
         }
         this.loadData();
       },
       error: (err) => {
         console.error('Error fetching template info:', err);
-        this.loadData(); 
+        this.loadData();
       }
     });
   }
@@ -79,10 +81,10 @@ export class UserViewDataComponent implements OnInit {
   }
 
   deleteForm(formDataId: string): void {
+    if (!this.allowDelete) return;
+
     if (confirm('Are you sure you want to delete this submission?')) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${this.authService.getToken()}`,
-      });
+      const headers = this.getAuthHeaders();
 
       this.http
         .delete(`http://localhost:8090/api/forms/${formDataId}/data`, { headers })
@@ -94,7 +96,7 @@ export class UserViewDataComponent implements OnInit {
           error: (err) => {
             console.error('Delete error:', err);
             alert('Failed to delete. Please try again.');
-          },
+          }
         });
     }
   }

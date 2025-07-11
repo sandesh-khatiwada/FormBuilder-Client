@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,15 +15,22 @@ export class RegisterComponent {
   username: string = '';
   email: string = '';
   password: string = '';
+  confirmPassword: string = '';
   errorMessages: string[] = [];
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.errorMessages = []; 
+    this.errorMessages = [];
+
+    if (this.password !== this.confirmPassword) {
+      this.errorMessages.push('Password and Confirm Password do not match.');
+      return;
+    }
+
     this.authService.register(this.email, this.password, this.username).subscribe({
       next: () => {
-        // Navigation is handled by AuthService itself
+        // Navigation handled by AuthService
       },
       error: (err) => {
         console.error('Registration failed', err);

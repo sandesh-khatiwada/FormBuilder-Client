@@ -15,6 +15,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.action-icon{
+    width: 15px;
+}
+
 h2 {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -61,10 +65,14 @@ h2 {
   border: 1px solid #007bff;
 }
 
-.btn-outline:disabled {
-  color: #999;
-  border-color: #ccc;
-  cursor: not-allowed;
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
 }
 
 .table-scroll-wrapper {
@@ -85,4 +93,12 @@ h2 {
   border-color: #ccc;
   background-color: #f9f9f9;
   cursor: not-allowed;
+}
+
+.btn:disabled {
+  color: #999;
+  border-color: #ccc;
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+  border:2px;
 }

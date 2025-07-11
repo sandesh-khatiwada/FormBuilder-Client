@@ -64,3 +64,8 @@ select.form-control {
   color: #007bff;
   border: 1px solid #007bff;
 }
+
+.required-star {
+  color: red;
+  margin-left: 2px;
+}

@@ -6,7 +6,8 @@
 
     <form (ngSubmit)="onSubmit()">
       <div *ngFor="let field of jsonSchema" class="form-group">
-        <label>{{ field.label }}</label>
+        <label>{{ field.label }} <span *ngIf="field.required" class="required-star">*</span>
+        </label>
 
 
         <input
@@ -59,8 +60,6 @@
       </div>
 
       
-
-
       <div class="form-group">
         <label>
           <input type="checkbox" [(ngModel)]="provideResponse" name="provideResponse" />

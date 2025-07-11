@@ -12,6 +12,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './fill-form.component.html',
   styleUrls: ['./fill-form.component.css']
 })
+
 export class FillFormComponent implements OnInit {
   templateId!: string;
   jsonSchema: any[] = [];

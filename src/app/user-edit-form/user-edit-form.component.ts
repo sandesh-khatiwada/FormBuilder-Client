@@ -57,12 +57,10 @@ export class UserEditFormComponent implements OnInit {
         const submittedData = formDataResponse.jsonData;
         this.templateId = this.route.snapshot.paramMap.get('templateId')!;
 
-        // Build formValues from submittedData
         for (const field of submittedData) {
           this.formValues[field.key] = field.value;
         }
 
-        // 2. Now fetch schema to get dropdown options
         this.fetchFormSchemaAndMerge(submittedData);
       },
       error: (err) => {
@@ -79,7 +77,7 @@ export class UserEditFormComponent implements OnInit {
       next: (res) => {
         const schema = res.data.jsonSchema;
 
-        // Merge schema with submitted values
+    
         this.jsonSchema = submittedData.map((field) => {
           const schemaField = schema.find((s: any) => s.key === field.key);
           return {
@@ -114,12 +112,12 @@ export class UserEditFormComponent implements OnInit {
     }).subscribe({
       next: (res) => {
         this.isSubmitting = false;
-        alert('Form updated successfully!');
+        alert('Form response updated successfully!');
         this.router.navigate(['/user-view-data', this.templateId]);
       },
       error: (err) => {
         this.isSubmitting = false;
-        alert('Failed to update form.');
+        alert('Failed to update form response.');
         console.error(err);
       }
     });

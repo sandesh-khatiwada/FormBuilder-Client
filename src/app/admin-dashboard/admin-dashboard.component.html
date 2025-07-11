@@ -10,17 +10,17 @@
     </div>
 
 
-<div class="form-group" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-  <input
-    type="text"
-    [(ngModel)]="searchQuery"
-    (keyup.enter)="searchTemplates()"
-    placeholder="Search by Name..."
-    class="form-control"
-    style="flex: 1;"
-  />
-  <button class="btn btn-outline" (click)="searchTemplates()">Search</button>
-</div>
+  <div class="form-group" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="searchTemplates()"
+      placeholder="Search by Name..."
+      class="form-control"
+      style="flex: 1;"
+    />
+    <button class="btn btn-outline" (click)="searchTemplates()">Search</button>
+  </div>
 
     <div *ngIf="formTemplates.length === 0" class="text-center">
       <p>No Form Templates</p>
@@ -39,11 +39,11 @@
 
     
 
-<div class="pagination" *ngIf="formTemplates.length > 0">
-  <button class="btn btn-outline" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-  <span style="align-self: center;">Page {{ currentPage }}</span>
-  <button class="btn btn-outline" (click)="nextPage()" [disabled]="!hasNextPage">Next</button>
-</div>
+  <div class="pagination" *ngIf="formTemplates.length > 0">
+    <button class="btn btn-outline" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <span style="align-self: center;">Page {{ currentPage }}</span>
+    <button class="btn btn-outline" (click)="nextPage()" [disabled]="!hasNextPage">Next</button>
+  </div>
 
 
 <div class="text-center" *ngIf="!hasNextPage && formTemplates.length > 0">

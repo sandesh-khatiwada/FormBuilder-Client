@@ -12,10 +12,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.css']
 })
-
 export class CreateFormComponent {
   formName = '';
   allowEdit = false;
+  allowDelete = false;
   jsonSchema: any[] = [];
   isSubmitting = false;
   apiUrl = 'http://localhost:8090/api';
@@ -36,9 +36,8 @@ export class CreateFormComponent {
     this.jsonSchema.push({
       label: '',
       type: 'text',
-      key: '',
       required: false,
-      optionsInput: '' // for dropdown
+      optionsInput: ''
     });
   }
 
@@ -46,8 +45,24 @@ export class CreateFormComponent {
     this.jsonSchema.splice(index, 1);
   }
 
-    goBack(): void {
+  goBack(): void {
     this.router.navigate(['/admin-dashboard']);
+  }
+
+  generateUniqueKey(label: string, usedKeys: Set<string>): string {
+    const baseKey = label
+      .trim()
+      .toLowerCase()
+      .replace(/[^\w\s]/g, '')  // remove special characters
+      .split(/\s+/)[0];         // take first word
+
+    let key = baseKey;
+    let counter = 1;
+    while (usedKeys.has(key)) {
+      key = `${baseKey}-${counter++}`;
+    }
+    usedKeys.add(key);
+    return key;
   }
 
   onSubmit(): void {
@@ -57,21 +72,28 @@ export class CreateFormComponent {
     }
 
     for (const field of this.jsonSchema) {
-      if (!field.label.trim() || !field.key.trim()) {
-        alert('All fields must have a label and key.');
+      if (!field.label.trim()) {
+        alert('Each field must have a label.');
         return;
       }
     }
 
-    // Convert dropdown optionsInput to options array
+    const usedKeys = new Set<string>();
+
     const schemaWithParsedOptions = this.jsonSchema.map(field => {
       const fieldCopy = { ...field };
+
+
+      fieldCopy.key = this.generateUniqueKey(field.label, usedKeys);
+
+
       if (field.type === 'dropdown' && field.optionsInput) {
-      fieldCopy.options = field.optionsInput
-      .split(',')
-      .map((opt: string) => opt.trim())
-      .filter((opt: string) => opt);
+        fieldCopy.options = field.optionsInput
+          .split(',')
+          .map((opt: string) => opt.trim())
+          .filter((opt: string) => opt);
       }
+
       delete fieldCopy.optionsInput;
       return fieldCopy;
     });
@@ -79,7 +101,8 @@ export class CreateFormComponent {
     const body = {
       name: this.formName,
       jsonSchema: schemaWithParsedOptions,
-      allowEdit: this.allowEdit
+      allowEdit: this.allowEdit,
+      allowDelete: this.allowDelete
     };
 
     this.isSubmitting = true;

@@ -22,20 +22,22 @@
             <td *ngFor="let cell of row.jsonData" class="truncate-cell table-data" [attr.title]="cell.value">
               {{ formatValue(cell) }}
             </td>
-            <td>
-              <button 
-                class="btn btn-sm btn-outline" 
-                [disabled]="!allowEdit"
-                title="{{ allowEdit ? '' : 'Editing not allowed for this form' }}"
-                (click)="editForm(row.formDataId)">
-                Edit
-              </button>
-              <button 
-                class="btn btn-sm btn-danger" 
-                (click)="deleteForm(row.formDataId)">
-                Delete
-              </button>
-            </td>
+  <td>
+  <button 
+    class="btn btn-sm btn-outline" 
+    [disabled]="!allowEdit"
+    title="{{ allowEdit ? '' : 'Editing not allowed for this form' }}"
+    (click)="editForm(row.formDataId)">
+    Edit <img class="action-icon" src="edit.png" alt="">
+  </button>
+  <button 
+    class="btn btn-sm btn-danger" 
+    [disabled]="!allowDelete"
+    title="{{ allowDelete ? '' : 'Deletion not allowed for this form' }}"
+    (click)="deleteForm(row.formDataId)">
+    Delete <img class="action-icon" src="trash.png" alt="">
+  </button>
+</td>
           </tr>
         </tbody>
       </table>

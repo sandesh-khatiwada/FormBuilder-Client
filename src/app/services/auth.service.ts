@@ -12,6 +12,7 @@ interface LoginResponse {
     email: string;
     token: string;
     roles: string[];
+    username:string;
   };
   errors: any;
   timestamp: string;
@@ -33,10 +34,13 @@ interface RegisterResponse {
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AuthService {
   private apiUrl = 'http://localhost:8090/api';
   private token: string | null = null;
   private roles: string[] = [];
+  private username:string|null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -47,8 +51,10 @@ export class AuthService {
           if (response.success) {
             this.token = response.data.token;
             this.roles = response.data.roles;
+            this.username = response.data.username;
             localStorage.setItem('token', this.token);
             localStorage.setItem('roles', JSON.stringify(this.roles));
+            localStorage.setItem('username',this.username);
             this.navigateBasedOnRole();
           }
         })

@@ -6,7 +6,8 @@
 
     <form (ngSubmit)="onSubmit()">
       <div *ngFor="let field of jsonSchema" class="form-group">
-        <label>{{ field.label }}</label>
+        <label>{{ field.label }} <span *ngIf="field.required" class="required-star">*</span>
+        </label>
 
         <input
           *ngIf="field.type === 'text' || field.type === 'email' || field.type === 'number'"
